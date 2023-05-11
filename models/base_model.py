@@ -6,26 +6,27 @@ from datetime import datetime
 
 class BaseModel:
     """Representing the BaseModel"""
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
-            Public instance attributes:
-            id: string - assign with an uuid when an instance is created:
-            you can use uuid.uuid4() to generate unique id but don’t forget
-            to convert to a string
-            the goal is to have unique id for each BaseModel
-            created_at: datetime - assign with the current datetime when an
-            instance is created
-            updated_at: datetime - assign with the current datetime when an
-            instance is created and it will be updated every time
-            you change your object
+            initializing the BaseModel and
+            using *args, and **kwargs arguments as constructor
+            of the BaseModel
+
+            Args:
+                *args(tuple(args1, args2))= this is a tuple
+                **kwargs({"key":value}) = This is a dictionary
         """
 
-        id = str(uuid.uuid4())
-        created_at = datetime.now()
-        updated_at = datetime.now()
-        self.id = id
-        self.created_at = created_at
-        self.updated_at = updated_at
+        if kwargs:
+            kwargs.pop('__class__', None)
+            for key, value in kwargs.items():
+                if key in ["created_at", "updated_at"]:
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
 
     def __str__(self):
         """__str__:should print: [<class name>] (<self.id>) <self.__dict__>"""
@@ -52,6 +53,6 @@ class BaseModel:
                 "__class__": self.__class__.__name__,
                 "id": self.id,
                 "created_at": self.created_at.isoformat(),
-                "updated_at": self.updated_at.isoformat(),
+                "updated_at": self.updated_at.isoformat()
                 })
         return my_dict
