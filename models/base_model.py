@@ -2,6 +2,8 @@
 """ This is a BaseModel class that defines the all common attributes/methods"""
 import uuid
 from datetime import datetime
+from models import storage
+import models
 
 
 class BaseModel:
@@ -24,9 +26,11 @@ class BaseModel:
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 setattr(self, key, value)
         else:
+            # this create a new instance
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
+            storage.new(self)
 
     def __str__(self):
         """__str__:should print: [<class name>] (<self.id>) <self.__dict__>"""
@@ -43,6 +47,7 @@ class BaseModel:
         """
 
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """This methods returns a dictionary containing all keys/values
