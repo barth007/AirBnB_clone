@@ -4,7 +4,7 @@ Unit tests for base_model.py
 """
 import unittest
 from models.base_model import BaseModel
-import datetime
+import os
 import pep8
 
 
