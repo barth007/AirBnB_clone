@@ -2,7 +2,7 @@
 """
 Unit tests for base_model.py
 """
-import unittest 
+import unittest
 from models.base_model import BaseModel
 import datetime
 import pep8
@@ -53,6 +53,7 @@ class TestBaseModel(unittest.TestCase):
         self.assserEqual(d['__class__'], 'BaseModel')
         self.assertEqual(d['name'], "School")
         self.assertEqual(d['my_number'], 89)
+
 
 if __name__ == "__main__":
     unittest.main()

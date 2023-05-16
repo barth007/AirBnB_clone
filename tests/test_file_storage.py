@@ -8,7 +8,7 @@ from models.engine.file_storage import Filestorage
 from models import *
 
 
-class  Test_FileStorage(unittest.TestCase):
+class Test_FileStorage(unittest.TestCase):
     """ Test file storage"""
 
     def setup(self):
@@ -19,11 +19,11 @@ class  Test_FileStorage(unittest.TestCase):
         pep8style = pep8.styleGuide(quiet=True)
         p = pep8style.check_files(['models/engine/file_storage.py'])
         self.assertEqual(p.total_errors, 0, "fix pep8")
-    
+
     def test__attrs(self):
         """test for presence of attributes"""
         self.assertFalse(hasattr(self.store, "barthandkene.json"))
-        
+
     def test_all(self):
         """ Test if all works in File Storage"""
         storage = FileStorage()
@@ -33,6 +33,5 @@ class  Test_FileStorage(unittest.TestCase):
         self.assertIs(obj, storage.FileStorage__objects)
 
 
-if"__main__" == __name__:
+if "__main__" == __name__:
     unittest.main()
-
