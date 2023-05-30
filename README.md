@@ -10,3 +10,5 @@ Reviews
 The front end, we will use cdm module
 The Backend, we will use OOP concepts
 The database(storage), we will use json module
+=====================================================================
+I'm creating the webstatic of this project
